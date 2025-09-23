@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Journal{% endblock %}
+
+{% block content %}
+<h2>Journal</h2>
+<p>Write down your thoughts here.</p>
+<form method="post">
+    <label for="title">Title:</label><br>
+    <input type="text" id="title" name="title" required><br><br>
+    <label for="body">Body:</label><br>
+    <textarea id="body" name="body" rows="10" cols="50" required></textarea><br><br>
+    <button type="submit">Save</button>
+</form>
+<h2>Previous Entries</h2>
+<ul>
+    {% for entry in entries %}
+    <li><strong><a href="{{ url_for('view_entry', entry_id=entry.id) }}">{{ entry.title }}</a></strong></li>
+    {% else %}
+    <li>No entries yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
