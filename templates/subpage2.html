@@ -1,7 +1,23 @@
 {% extends "base.html" %}
-{% block title %}Subpage 2{% endblock %}
-
 {% block content %}
-<h2>Subpage 2</h2>
-<p>This is the content of subpage 2.</p>
+<h1>{{ category.capitalize() }} Videos</h1>
+<form method="POST">
+    <input type="text" name="search" placeholder="Search YouTube videos..." required>
+    <select name="category">
+        <option value="instructional" {% if category == "instructional" %}selected{% endif %}>Instructional</option>
+        <option value="professional" {% if category == "professional" %}selected{% endif %}>Professional</option>
+    </select>
+    <button type="submit">Search</button>
+</form>
+
+<div class="video-container">
+    {% for video in videos %}
+        <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/{{ video.videoId }}" allowfullscreen></iframe>
+            <p>{{ video.title }}</p>
+        </div>
+    {% endfor %}
+</div>
+
+
 {% endblock %}
