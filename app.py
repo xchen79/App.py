@@ -40,13 +40,16 @@ def subpage2():
     videos = []
     if search_query:
         YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", "AIzaSyCI4vZ7LJOVUyb7yzQNHaJAs9MiBHL5qs0")
+        search_term = f"{search_query} tennis"
         search_url = "https://www.googleapis.com/youtube/v3/search"
         params = {
             "part": "snippet",
-            "q": search_query,
+            "q": search_term,
             "key": YOUTUBE_API_KEY,
-            "maxResults": 10,
-            "type": "video"
+            "maxResults": 15,
+            "type": "video",
+            "videoCategoryId": "17",
+            "publishedAfter": "2016-01-01T00:00:00Z"
         }
         response = requests.get(search_url, params=params)
         data = response.json()
