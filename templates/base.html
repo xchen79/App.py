@@ -7,11 +7,12 @@
 </head>
 <body>
     <header>
+        <div class="header-container">
         <img src="{{ url_for('static', filename='assets/Logo.png') }}" alt="Tennis logo" class="logo" />
-        <h1>Tennis at Love</h1>
+        <h1 class="title"><a href="{{ url_for('home') }}">Tennis at Love</a></h1>
+        </div>
         <nav>
-            <a>The go-to hub for all things tennis related</a>
-            <a href="{{ url_for('home') }}">Home</a>
+            <a>The go-to hub for all things tennis related.</a>
         </nav>
     </header>
 

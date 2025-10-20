@@ -34,3 +34,22 @@ header {
     height: 55px;
     vertical-align: middle;
 }
+
+.header-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+a:visited {
+    color:black;
+}
+
+.journal_button {
+    background-color: #004c99;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
