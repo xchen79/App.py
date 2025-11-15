@@ -2,12 +2,12 @@
 {% block content %}
 <h1>{{ category.capitalize() }} Videos</h1>
 <form method="POST">
-    <input type="text" name="search" placeholder="Search YouTube videos..." required>
+    <input class="video-search" type="text" name="search" placeholder="Search YouTube videos..." required>
+    <button class="search-button" type="submit">Search</button>
     <select name="category">
         <option value="instructional" {% if category == "instructional" %}selected{% endif %}>Instructional</option>
         <option value="professional" {% if category == "professional" %}selected{% endif %}>Professional</option>
     </select>
-    <button type="submit">Search</button>
 </form>
 
 <div class="video-container">

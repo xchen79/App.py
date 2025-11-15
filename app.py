@@ -11,11 +11,11 @@ app = Flask(__name__)
 journal_entries = []
 next_id = 1
 
-OPENAI_API_Key = os.environ.get("OpenAI_API_Key")
+OPENAI_API_KEY = "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"
 OPENAI_MODEL = os.environ.get("OPENAI_MODEL", "gpt-4o-mini")  # change if you want
-if not OPENAI_API_Key:
+if not OPENAI_API_KEY:
     raise RuntimeError("Set the OPENAI_API_KEY environment variable.")
-openai.api_key = OPENAI_API_Key
+openai.api_key = OPENAI_API_KEY
 
 DATABASE = os.path.join(os.path.dirname(__file__), "chat.db")
 
