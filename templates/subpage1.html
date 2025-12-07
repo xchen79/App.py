@@ -1,22 +1,42 @@
 {% extends "base.html" %}
+
 {% block title %}Journal{% endblock %}
 
 {% block content %}
-<h2>Journal</h2>
-<p>Write down your thoughts here.</p>
-<form method="post">
-    <label for="title">Title:</label><br>
-    <input type="text" id="title" name="title" required><br><br>
-    <label for="body">Body:</label><br>
-    <textarea id="body" name="body" rows="10" cols="50" required></textarea><br><br>
-    <button class="journal_button" type="submit">Save</button>
-</form>
-<h2>Previous Entries</h2>
-<ul>
-    {% for entry in entries %}
-    <li><strong><a href="{{ url_for('view_entry', entry_id=entry.id) }}">{{ entry.title }}</a></strong></li>
-    {% else %}
-    <li>No entries yet.</li>
-    {% endfor %}
-</ul>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Your Tennis Journal</h1>
+            <p>Record your thoughts, progress, and reflections from the court.</p>
+            <video class="hero-video" autoplay muted loop playsinline 
+         poster="{{ url_for('static', filename='assets/coaching-video-loop-compressed.mp4') }}">
+      
+        <source src="{{ url_for('static', filename='assets/coaching-video-loop-compressed.mp4') }}" type="video/webm">
+        <source src="{{ url_for('static', filename='assets/coaching-video-loop-compressed.mp4') }}" type="video/mp4">
+
+</video>
+        </div>
+    </section>
+
+    <h2>Write Your Thoughts</h2>
+    <p>Write down your latest experiences and reflections here.</p>
+    <form method="post" class="journal-form">
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title" required><br><br>
+        
+        <label for="body">Body:</label><br>
+        <textarea id="body" name="body" rows="10" cols="50" required></textarea><br><br>
+
+        <button class="journal_button" type="submit">Save</button>
+    </form>
+
+    <h2>Previous Entries</h2>
+    <ul class="entries-list">
+        {% for entry in entries %}
+            <li><strong><a href="{{ url_for('view_entry', entry_id=entry.id) }}">{{ entry.title }}</a></strong></li>
+        {% else %}
+            <li>No entries yet.</li>
+        {% endfor %}
+    </ul>
 {% endblock %}
+
