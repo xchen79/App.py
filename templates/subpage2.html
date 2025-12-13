@@ -14,7 +14,7 @@
     {% for video in videos %}
         <div class="video-card">
             <iframe src="https://www.youtube.com/embed/{{ video.videoId }}" allowfullscreen></iframe>
-            <p>{{ video.title }}</p>
+            <p>{{ video.title|safe }}</p>
         </div>
     {% endfor %}
 </div>
