@@ -7,7 +7,9 @@ from datetime import datetime
 from flask import Flask, render_template, request, jsonify, g, send_file, redirect, url_for
 import requests
 import openai
+from dotenv import load_dotenv
 app = Flask(__name__)
+load_dotenv()
 journal_entries = []
 next_id = 1
 
@@ -134,6 +136,7 @@ def home():
     ]
     return render_template("index.html", tiles=tiles)
 
+
 @app.route("/subpage1", methods=["GET", "POST"])
 def subpage1():
     global next_id
@@ -143,10 +146,10 @@ def subpage1():
         if title and body:
             journal_entries.append({"id": next_id, "title": title, "body": body})
             next_id += 1
-        return redirect(url_for("subpage1.html"))
+        return redirect(url_for("subpage1"))
     return render_template("subpage1.html", entries=journal_entries)
 @app.route("/subpage1/<int:entry_id>")
-def display(entry_id):
+def view_entry(entry_id):
     entry = next((e for e in journal_entries if e["id"] == entry_id), None)
     if not entry:
         return "Entry not found", 404

@@ -3,40 +3,78 @@
 {% block title %}Journal{% endblock %}
 
 {% block content %}
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Welcome to Your Tennis Journal</h1>
-            <p>Record your thoughts, progress, and reflections from the court.</p>
-            <video class="hero-video" autoplay muted loop playsinline 
-         poster="{{ url_for('static', filename='assets/coaching-video-loop-compressed.mp4') }}">
-      
-        <source src="{{ url_for('static', filename='assets/coaching-video-loop-compressed.mp4') }}" type="video/webm">
-        <source src="{{ url_for('static', filename='assets/coaching-video-loop-compressed.mp4') }}" type="video/mp4">
+<div class="page-container">
 
-</video>
+    <h1>Welcome to Your Tennis Journal</h1>
+
+    <!-- Journaling Benefits Section -->
+    <section class="journaling-benefits">
+        <div class="benefit">
+            <div class="icon">
+                <!-- Brain / clarity icon -->
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M9 2a3 3 0 0 0-3 3v1a3 3 0 0 0 0 6v1a3 3 0 0 0 3 3h1v-14H9zm6 0h-1v14h1a3 3 0 0 0 3-3v-1a3 3 0 0 0 0-6V5a3 3 0 0 0-3-3z"/>
+                </svg>
+            </div>
+            <p>
+                <strong>Improves mental clarity</strong><br />
+                Writing your thoughts down helps organize ideas, reduce overwhelm, and gain perspective.
+            </p>
+        </div>
+
+        <div class="benefit">
+            <div class="icon">
+                <!-- Heart / emotional health icon -->
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 21s-7-4.6-10-9.3C-1 6.2 3.3 2 7.5 4.5 9 5.4 10 7 12 8.5 14 7 15 5.4 16.5 4.5 20.7 2 25 6.2 22 11.7 19 16.4 12 21 12 21z"/>
+                </svg>
+            </div>
+            <p>
+                <strong>Supports emotional well-being</strong><br />
+                Journaling provides a safe space to process feelings and manage stress more effectively.
+            </p>
+        </div>
+
+        <div class="benefit">
+            <div class="icon">
+                <!-- Target / self-growth icon -->
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="12" r="6"/>
+                    <circle cx="12" cy="12" r="2"/>
+                </svg>
+            </div>
+            <p>
+                <strong>Encourages self-growth</strong><br />
+                Reflecting regularly helps you track progress, build habits, and set meaningful goals.
+            </p>
         </div>
     </section>
 
-    <h2>Write Your Thoughts</h2>
-    <p>Write down your latest experiences and reflections here.</p>
-    <form method="post" class="journal-form">
-        <label for="title">Title:</label><br>
+    <!-- Journal Form -->
+    <form id="journal-form" method="post" class="journal-form">
+        <label for="title">Journal Title</label><br>
         <input type="text" id="title" name="title" required><br><br>
-        
-        <label for="body">Body:</label><br>
+
+        <label for="body">Journal Entry</label><br>
         <textarea id="body" name="body" rows="10" cols="50" required></textarea><br><br>
 
         <button class="journal_button" type="submit">Save</button>
     </form>
 
+    <!-- Previous Entries -->
     <h2>Previous Entries</h2>
-    <ul class="entries-list">
+    <ul id="entries-container" class="entries-list">
         {% for entry in entries %}
-            <li><strong><a href="{{ url_for('view_entry', entry_id=entry.id) }}">{{ entry.title }}</a></strong></li>
+            <li>
+                <strong>
+                    <a href="{{ url_for('view_entry', entry_id=entry.id) }}">{{ entry.title }}</a>
+                </strong>
+            </li>
         {% else %}
             <li>No entries yet.</li>
         {% endfor %}
     </ul>
-{% endblock %}
 
+</div>
+{% endblock %}

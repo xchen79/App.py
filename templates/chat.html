@@ -1,8 +1,11 @@
-<html lang="en">
+{% extends "base.html" %}
+
+{% block title %}Journal{% endblock %}
+
+{% block content %}
 <head>
 <meta charset="UTF-8">
 <title>Tennis Chat Coach</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
 <h1>Tennis Chat Coach</h1>
@@ -10,7 +13,8 @@
 <input type="text" id="username" placeholder="Your name" value="Player">
 <input type="text" id="message" placeholder="Type your message" style="width:60%;">
 <button id="sendBtn">Send</button>
-
 <script src="{{ url_for('static', filename='chat.js') }}"></script>
+
 </body>
-</html>
+
+{% endblock %}

@@ -5,19 +5,74 @@
     <title>{% block title %}Tennis at Love{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
+
 <body>
-    <header>
+    <header class="site-header">
+
         <div class="header-container">
+            <div class="logo-container">
         <img src="{{ url_for('static', filename='assets/Logo.png') }}" alt="Tennis logo" class="logo" />
         <h1 class="title"><a href="{{ url_for('home') }}">Tennis at Love</a></h1>
-        </div>
-        <nav>
-            <a>The go-to hub for all things tennis related.</a>
-        </nav>
-    </header>
+    </div>
+        <a>The go-to hub for all things tennis related.</a>
 
-    <main>
+        </div>
+        <div class="nav-container">
+            <button class="menu-toggle" aria-label="Open menu">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+        
+            <nav class="main-nav">
+              {% for tile in tiles %}
+              <a class="nav-link" href="{{ tile.url }}" data-link>
+                  {{ tile.title }}
+                </a>
+              {% endfor %}
+            </nav>
+        
+          </div>
+    </header>
+    <!-- Hero Section -->
+
+    <main id="app-content">
         {% block content %}{% endblock %}
-    </main>
+      </main>
 </body>
 </html>
+<script>
+    const toggle = document.querySelector(".menu-toggle");
+    const nav = document.querySelector(".main-nav");
+  
+    toggle.addEventListener("click", () => {
+      nav.classList.toggle("open");
+    });
+  </script>
+
+<script>
+    const content = document.getElementById("app-content");
+  
+    document.addEventListener("click", async (e) => {
+      const link = e.target.closest("a[data-link]");
+      if (!link) return;
+  
+      e.preventDefault();
+  
+      const url = link.getAttribute("href");
+      const response = await fetch(url);
+      const html = await response.text();
+  
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, "text/html");
+      const newContent = doc.querySelector("#app-content");
+  
+      content.innerHTML = newContent.innerHTML;
+      history.pushState(null, "", url);
+    });
+  
+    window.addEventListener("popstate", () => {
+      location.reload();
+    });
+  </script>

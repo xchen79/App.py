@@ -112,6 +112,7 @@ a:visited {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 40px;
+    text-align: left;
 }
 
 .journal-form label {
@@ -172,34 +173,147 @@ a:visited {
     text-decoration: underline;
 }
 
+
+
+/* Hero wrapper */
 .hero {
     position: relative;
-    height: 500px;
-    border-radius: 8px;
-    overflow: hidden; /* Ensures the video stays inside the hero section */
-    width: 110%;
-}
-
-/* Updated video styling */
-.hero-video {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 300%;
-    object-fit: cover;   /* Video fills the hero container */
-    z-index: 0;          /* Behind everything */
-}
+    height: 60vh; /* adjust if needed */
+    overflow: hidden;
+  }
+  
+  /* Video background */
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* MOST IMPORTANT */
+  }
 
-/* Keep text visible above video */
-.hero-content {
+  /* Header */
+  .site-header {
+    position: sticky; /* stays visible at top */
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    z-index: 1000;
+    background: white;
+    border-bottom: 1px solid #eee;
+  }
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: white;
+    border-bottom: 1px solid #eee;
+  }
+  .logo-container{
+    display: flex;
+    flex-direction: row;
+  }
+  /* Container */
+  .nav-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  
+  /* Logo */
+  .logo a {
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #111;
+  }
+  
+  /* Nav links (desktop) */
+  .main-nav {
+    display: flex;
+    gap: 28px;
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    font-weight: 500;
+    color: #333;
     position: relative;
-    z-index: 1;          /* Ensures text appears over video */
-    background: rgba(0, 0, 0, 0.45);
-    padding: 20px;
-    border-radius: 8px;
-}
-
+  }
+  
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #4f46e5;
+    transition: width 0.2s ease;
+  }
+  
+  .nav-link:hover::after {
+    width: 100%;
+  }
+  
+  /* Hamburger */
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .menu-toggle span {
+    width: 24px;
+    height: 2px;
+    background: #111;
+    display: block;
+  }
+  
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    .menu-toggle {
+      display: flex;
+    }
+  
+    .main-nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+  
+      background: white;
+      border-bottom: 1px solid #eee;
+  
+      flex-direction: column;
+      gap: 0;
+  
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+  
+    .main-nav.open {
+      max-height: 300px;
+    }
+  
+    .nav-link {
+      padding: 16px 20px;
+      border-top: 1px solid #f2f2f2;
+    }
+  
+    .nav-link::after {
+      display: none;
+    }
+  }
 /* Page container */
 body {
     font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -315,6 +429,46 @@ select {
     color: #34495e;
 }
 
+.journaling-benefits {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  .benefit {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  
+  .icon {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    background-color: #eef2ff;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .icon svg {
+    width: 22px;
+    height: 22px;
+    fill: #4f46e5;
+  }
+  
+  .benefit p {
+    margin: 0;
+    line-height: 1.5;
+  }
+  
+  .benefit strong {
+    font-size: 1.05rem;
+    display: inline-block;
+    margin-bottom: 4px;
+  }
+
 /* Responsive tweaks */
 @media (max-width: 600px) {
     h1 {
@@ -362,6 +516,7 @@ header {
 /* Header layout */
 .header-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 1rem;
 }
@@ -398,3 +553,4 @@ nav a {
 main {
     padding: 2rem 2.5rem;
 }
+
