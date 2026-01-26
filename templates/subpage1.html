@@ -5,7 +5,7 @@
 {% block content %}
 <div class="page-container">
 
-    <h1>Welcome to Your Tennis Journal</h1>
+            <h1>Welcome to Your Tennis Journal</h1>
 
     <!-- Journaling Benefits Section -->
     <section class="journaling-benefits">
@@ -51,16 +51,22 @@
         </div>
     </section>
 
+    <div class="button-container">
+        <button class="icon-button">
+        <img class="journal-button" src="{{ url_for('static', filename='assets/plus-sign.png') }}">
+    </button>
+    </div>
+
     <!-- Journal Form -->
-    <form id="journal-form" method="post" class="journal-form">
+    <!-- <form id="journal-form" method="post" class="journal-form">
         <label for="title">Journal Title</label><br>
         <input type="text" id="title" name="title" required><br><br>
-
+        
         <label for="body">Journal Entry</label><br>
         <textarea id="body" name="body" rows="10" cols="50" required></textarea><br><br>
 
         <button class="journal_button" type="submit">Save</button>
-    </form>
+    </form> -->
 
     <!-- Previous Entries -->
     <h2>Previous Entries</h2>
@@ -78,3 +84,4 @@
 
 </div>
 {% endblock %}
+

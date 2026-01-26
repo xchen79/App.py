@@ -816,3 +816,25 @@ main {
     transform: translateY(0);
   }
 }
+
+.icon-button {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #007aff;
+}
+
+.journal-button {
+    width: 75px;
+    height: 75px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center;     /* Centers vertically */
+    height: 75px;
+}
