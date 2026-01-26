@@ -1,14 +1,41 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>{{ category.capitalize() }} Videos</h1>
-<form method="POST">
-    <input class="video-search" type="text" name="search" placeholder="Search YouTube videos..." required>
-    <button class="search-button" type="submit">Search</button>
-    <select name="category">
-        <option value="instructional" {% if category == "instructional" %}selected{% endif %}>Instructional</option>
-        <option value="professional" {% if category == "professional" %}selected{% endif %}>Professional</option>
-    </select>
-</form>
+
+<section class="mental-library">
+    <div class="library-container">
+      <h1>Tennis Video Library</h1>
+  
+      <p class="library-description">
+        Train your mind like you train your strokes. Explore instructional and professional tennis videos
+        focused on confidence, focus, pressure, and emotional control.
+      </p>
+  
+      <form method="POST">
+        <div>
+        <input class="video-search" type="text" name="search" placeholder="Search videos" required>
+        </div>
+        <div>
+            <button class="search-button" type="submit">Search</button>
+        </div>
+        <div>
+        <select name="category">
+            <option value="instructional" {% if category == "instructional" %}selected{% endif %}>Instructional</option>
+            <option value="professional" {% if category == "professional" %}selected{% endif %}>Professional</option>
+        </select>
+        </div>
+    </form>
+  
+      <p class="example-topics">
+        Popular topics:
+        <span>match nerves</span>
+        <span>confidence after mistakes</span>
+        <span>pressure points</span>
+        <span>focus routines</span>
+        <span>composure</span>
+      </p>
+    </div>
+  </section>
+
 
 <div class="video-container">
     {% for video in videos %}

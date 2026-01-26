@@ -2,19 +2,50 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<h2>Welcome!</h2>
 
 <section class="hero">
-    <div class="hero-content">
+    <section class="hero">
+        <div class="hero-content">
+            
+            <video class="hero-video" autoplay muted loop playsinline 
+            poster="{{ url_for('static', filename='assets/coaching-video-loop-compressed.mp4') }}">
         
-        <video class="hero-video" autoplay muted loop playsinline 
-        poster="{{ url_for('static', filename='assets/coaching-video-loop-compressed.mp4') }}">
+                <source src="{{ url_for('static', filename='assets/coaching-video-loop-compressed.mp4') }}" type="video/webm">
+                <source src="{{ url_for('static', filename='assets/coaching-video-loop-compressed.mp4') }}" type="video/mp4">
     
-            <source src="{{ url_for('static', filename='assets/coaching-video-loop-compressed.mp4') }}" type="video/webm">
-            <source src="{{ url_for('static', filename='assets/coaching-video-loop-compressed.mp4') }}" type="video/mp4">
-
-        </video>
+            </video>
+        </div>
+    </section>    
+    <div class="hero-overlay">
+      <h1 class="fade-up">The Mental Side of Tennis</h1>
+      <p class="fade-up delay-1">Train focus. Build confidence. Handle pressure.</p>
     </div>
-</section>
+  </section>
+  
+  <section class="features">
+    <div class="feature fade-up">
+      <span>📝</span>
+      <p>Reflect</p>
+      <small>Journal your matches</small>
+    </div>
+  
+    <div class="feature fade-up delay-1">
+      <span>🎥</span>
+      <p>Learn</p>
+      <small>Mental training videos</small>
+    </div>
+  
+    <div class="feature fade-up delay-2">
+      <span>🎾</span>
+      <p>Analyze</p>
+      <small>Match & mindset breakdowns</small>
+    </div>
+  
+    <div class="feature fade-up delay-3">
+      <span>💬</span>
+      <p>Talk</p>
+      <small>Chat with a coach</small>
+    </div>
+  </section>
 
 {% endblock %}
