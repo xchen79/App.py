@@ -19,18 +19,23 @@
     <div id="chatbox">
         <div class="message bot">
             Hi! 👋 I’m your Tennis Chat Coach. What are you working on today?
+        <div id="userMessages"></div>
         </div>
     </div>
 
+    <!-- changed: use a form so Enter/submission can be handled consistently -->
     <div class="chat-input">
-        <input type="text" id="username" value="Player">
-        <input type="text" id="message" placeholder="Type your question…">
-        <button id="sendBtn">➤</button>
+        <form id="chatForm">
+            <input type="text" id="username" value="Player">
+            <input type="text" id="message" placeholder="Type your question…">
+            <button id="sendBtn" type="submit">➤</button>
+        </form>
     </div>
 
 </div>
 
-<link rel="stylesheet" href="{{ url_for('static', filename='chat.css') }}">
+<!-- fixed: point to existing stylesheet file -->
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <script src="{{ url_for('static', filename='chat.js') }}"></script>
 
 {% endblock %}

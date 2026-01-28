@@ -594,8 +594,10 @@ main {
 /* -------- Chat Box -------- */
 #chatbox {
     flex: 1;
+    /* symmetric padding so bubbles align with the chat-container content edges */
     padding: 15px;
     overflow-y: auto;
+    overflow-x: visible; /* allow user bubble to extend slightly beyond padding */
     background-color: #f5f5f7;
 }
 
@@ -604,7 +606,8 @@ main {
     max-width: 75%;
     padding: 10px 14px;
     border-radius: 18px;
-    margin-bottom: 10px;
+    /* increase vertical spacing between bubbles */
+    margin-bottom: 18px;
     font-size: 15px;
     line-height: 1.4;
     word-wrap: break-word;
@@ -612,10 +615,16 @@ main {
 
 /* User (right side, blue) */
 .message.user {
-    background-color: #007aff;
+    background-color: #004691e2;
     color: white;
+    /* make the bubble a bit narrower so it sits further right */
+    max-width: 78%;
     margin-left: auto;
-    border-bottom-right-radius: 4px;
+    /* pull the bubble a little past the right padding so it appears closer to the container edge */
+    margin-right: 0px;
+    box-sizing: border-box; /* ensure width calculations include padding */
+    border-bottom-right-radius: 8px;
+    padding-right: 14px; /* keep text from touching the very edge */
 }
 
 /* Coach (left side, gray) */
@@ -629,24 +638,38 @@ main {
 /* -------- Input Bar -------- */
 .chat-input {
     display: flex;
-    padding: 10px;
+    padding: 0; /* remove outer padding so inner form can span full width */
     border-top: 1px solid #e5e5ea;
     background-color: #ffffff;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ensure the form inside the input bar fills the container */
+.chat-input form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px; /* visual spacing inside the bar */
+    box-sizing: border-box;
 }
 
 #message {
     flex: 1;
     border: none;
+    /* use modest horizontal padding so text starts at the left */
     padding: 10px 14px;
     border-radius: 20px;
     background-color: #f0f0f0;
     font-size: 15px;
     outline: none;
+    text-align: left; /* ensure placeholder and input text are left aligned */
 }
 
 #sendBtn {
-    margin-left: 10px;
-    background-color: #007aff;
+    /* button kept compact on the right; gap handled by form */
+    background-color: #004691e2;
     color: white;
     border: none;
     border-radius: 50%;
@@ -657,7 +680,7 @@ main {
 }
 
 #sendBtn:hover {
-    background-color: #005ecb;
+    background-color: #004691e2;
 }
 
 /* Hide username field (optional) */
@@ -837,4 +860,18 @@ main {
     justify-content: center; /* Centers horizontally */
     align-items: center;     /* Centers vertically */
     height: 75px;
+}
+
+.userMessages {
+    background-color: #004691e2;
+    color: white;
+    width: calc(100% + 40px);
+    margin-left: auto;
+    margin-right: 0px;
+    box-sizing: border-box; /* ensure width calculations include padding */
+    border-bottom-right-radius: 8px;
+    padding-right: 14px; /* keep text from touching the very edge */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }

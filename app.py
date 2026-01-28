@@ -7,13 +7,14 @@ from datetime import datetime
 from flask import Flask, render_template, request, jsonify, g, send_file, redirect, url_for
 import requests
 import openai
+from openai import OpenAI
 from dotenv import load_dotenv
 app = Flask(__name__)
 load_dotenv()
 journal_entries = []
 next_id = 1
 
-OPENAI_API_KEY = "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"
+OPENAI_API_KEY = "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"
 OPENAI_MODEL = os.environ.get("OPENAI_MODEL", "gpt-4o-mini")  # change if you want
 if not OPENAI_API_KEY:
     raise RuntimeError("Set the OPENAI_API_KEY environment variable.")
