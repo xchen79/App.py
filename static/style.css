@@ -197,7 +197,7 @@ a:visited {
     top: 0;
     display: flex;
     justify-content: space-between;
-    z-index: 1000;
+    z-index: 2000;
     background: white;
     border-bottom: 1px solid #eee;
   }
@@ -567,6 +567,10 @@ main {
     text-align: center;
     padding: 20px 15px 10px;
     border-bottom: 1px solid #e5e5ea;
+    position: sticky; /* keep header visible when content updates or page scrolls */
+    top: 0;
+    z-index: 50;
+    background-color: #ffffff; /* ensure header covers content when sticky */
 }
 
 .chat-header h1 {
@@ -601,8 +605,18 @@ main {
     background-color: #f5f5f7;
 }
 
+/* clearfix so floated message bubbles don't collapse */
+#chatbox::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
 /* Chat bubbles */
 .message {
+    /* make each bubble size to its content */
+    display: inline-block;
+    clear: both;
     max-width: 75%;
     padding: 10px 14px;
     border-radius: 18px;
@@ -611,17 +625,19 @@ main {
     font-size: 15px;
     line-height: 1.4;
     word-wrap: break-word;
+    box-sizing: border-box;
 }
 
 /* User (right side, blue) */
 .message.user {
     background-color: #004691e2;
     color: white;
-    /* make the bubble a bit narrower so it sits further right */
-    max-width: 78%;
-    margin-left: auto;
-    /* pull the bubble a little past the right padding so it appears closer to the container edge */
-    margin-right: 0px;
+    /* right-anchored and shrink-to-fit */
+    float: right;
+    width: auto;           /* shrink to content up to max-width */
+    max-width: 65%;
+    margin-left: 8px;      /* small gap from left-side content */
+    margin-right: 0;
     box-sizing: border-box; /* ensure width calculations include padding */
     border-bottom-right-radius: 8px;
     padding-right: 14px; /* keep text from touching the very edge */
@@ -631,7 +647,10 @@ main {
 .message.bot {
     background-color: #e5e5ea;
     color: #000;
-    margin-right: auto;
+    float: left;
+    width: auto;           /* shrink to content */
+    max-width: 75%;
+    margin-right: 8px;
     border-bottom-left-radius: 4px;
 }
 
@@ -874,4 +893,40 @@ main {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+}
+
+/* Typing indicator (three animated dots) */
+.message.typing {
+    background-color: #e5e5ea;
+    color: transparent;
+    width: 60px;
+    border-radius: 18px;
+    padding: 8px 12px;
+    display: inline-block;
+    margin-bottom: 18px;
+}
+
+.typing-dots {
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.typing-dots .dot {
+    width: 8px;
+    height: 8px;
+    background: #6b6b6b;
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: blink 1s infinite;
+}
+
+.typing-dots .dot:nth-child(1) { animation-delay: 0s; }
+.typing-dots .dot:nth-child(2) { animation-delay: 0.15s; }
+.typing-dots .dot:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes blink {
+    0% { opacity: 0.3; transform: translateY(0); }
+    50% { opacity: 1; transform: translateY(-4px); }
+    100% { opacity: 0.3; transform: translateY(0); }
 }

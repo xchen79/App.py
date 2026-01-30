@@ -14,11 +14,14 @@ load_dotenv()
 journal_entries = []
 next_id = 1
 
-OPENAI_API_KEY = "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"
+# load API key from environment (use a .env file locally; do NOT commit the .env file)
+OPENAI_API_KEY = "INSERT_API_KEY_HERE"
 OPENAI_MODEL = os.environ.get("OPENAI_MODEL", "gpt-4o-mini")  # change if you want
+# Don't raise if the key is missing; allow the app to run and fall back to mock responses.
 if not OPENAI_API_KEY:
-    raise RuntimeError("Set the OPENAI_API_KEY environment variable.")
-openai.api_key = OPENAI_API_KEY
+    print("Warning: OPENAI_API_KEY not set. Chat will use mock responses.")
+else:
+    openai.api_key = OPENAI_API_KEY
 
 DATABASE = os.path.join(os.path.dirname(__file__), "chat.db")
 
@@ -202,16 +205,20 @@ def api_chat():
         # Store user message
         insert_message(username=username, role="user", content=user_message)
 
-        # Call OpenAI using new API
-        response = openai.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": "You are an encouraging tennis coach, supportive and positive."},
-                {"role": "user", "content": user_message}
-            ]
-        )
-
-        assistant_text = response.choices[0].message.content.strip()
+        # If we don't have an API key, return a mock reply so the app still works locally
+        if not OPENAI_API_KEY:
+            assistant_text, metadata = call_openai_and_extract_metadata(username, user_message, mock=True)
+        else:
+            # Call OpenAI using new API
+            response = openai.chat.completions.create(
+                model=OPENAI_MODEL,
+                messages=[
+                    {"role": "system", "content": "You are an encouraging tennis coach, supportive and positive."},
+                    {"role": "user", "content": user_message}
+                ]
+            )
+            assistant_text = response.choices[0].message.content.strip()
+            metadata = None
 
         # Store assistant message
         insert_message(username=username, role="assistant", content=assistant_text)
@@ -219,7 +226,7 @@ def api_chat():
         return jsonify({
             "ok": True,
             "reply": assistant_text,
-            "metadata": {"encouragement": True}
+            "metadata": metadata or {"encouragement": True}
         })
     except Exception as e:
         return jsonify({"ok": False, "error": str(e)}), 500
